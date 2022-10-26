@@ -1,0 +1,4890 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0100)http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0450_the_bitmap_attribute -->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>NTFS File System Overview</title>
+        
+        <meta http-equiv="Expires" content="Wed, 31 Jan 2007 23:59:59 GMT">
+        <link rel="stylesheet" type="text/css" href="./NTFS File System Overview_files/syllabus.css">
+    </head>
+    <body data-new-gr-c-s-check-loaded="14.1085.0" data-gr-ext-installed="">
+    <p>
+        Course list
+        <a href="http://www.c-jump.com/bcc/"><tt>http://www.c-jump.com/bcc/</tt></a>
+    </p>
+    <h3>
+        NTFS File System Overview
+    </h3>
+    <hr>
+        <ol>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0010_ntfs">NTFS</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0020_ntfs_features">NTFS Features</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0030_ntfs_principals">NTFS Principals</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0040_ntfs_principals_cont">NTFS Principals, cont.</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0050_ntfs_transactions_co">NTFS Transactions, Compression, and Encryption</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0060_ntfs_file_names_and_p">NTFS File Names and Permissions</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0070_ntfs_metrics_and_limi">NTFS Metrics and Limitations</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0080_ntfs_predecessors__f">NTFS Predecessors - FAT12</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0090_ntfs_predecessors__f">NTFS Predecessors - FAT16</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0100_ntfs_predecessors__f">NTFS Predecessors - FAT32</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0110_ntfs_predecessors__h">NTFS Predecessors - HPFS</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0120_ntfs_finally">NTFS, finally</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0130_ntfs_partition_boot_s">NTFS Partition Boot Sector</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0140_ntfs_boot_sector_byte">NTFS Boot Sector bytes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0150_master_file_table">Master File Table</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0160_master_file_table_str">Master File Table Structure</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0170_master_file_table_pri">Master File Table Principals</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0180_mft_zone">MFT Zone</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0190_ntfs_system_files">NTFS system files</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0200_ntfs_system_files_co">NTFS system files, cont.</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0210_mft_entries">MFT Entries</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0220_mft_entry_format">MFT Entry Format</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0230_mft_attributes">MFT Attributes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0240_mft_attribute_types">MFT Attribute types</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0250_typical_mft_attribute">Typical MFT Attributes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0260_attribute_headers">Attribute Headers</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0270_attribute_types">Attribute Types</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0280_resident_unnamed_attr">Resident Unnamed Attribute Type</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0290_resident_named_attrib">Resident Named Attribute Type</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0300_nonresident_unnamed_">Non-Resident Unnamed Attribute Type</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0310_nonresident_named_at">Non-Resident Named Attribute Type</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0320_the_standardinforma">The $STANDARD_INFORMATION Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0330_the_standardinforma">The $STANDARD_INFORMATION DOS permissions</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0340_ntfs_timestamps">NTFS Timestamps</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0350_the_attributelist_a">The $ATTRIBUTE_LIST Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0360_the_filename_attrib">The $FILE_NAME Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0370_the_objectid_attrib">The $OBJECT_ID Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0380_the_securitydescrip">The $SECURITY_DESCRIPTOR Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0390_the_volumename_attr">The $VOLUME_NAME Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0400_the_volumeinformati">The $VOLUME_INFORMATION Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0410_the_data_attribute">The $DATA Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0420_runlists">Runlists</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0430_the_indexroot_attri">The $INDEX_ROOT Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0440_the_indexallocation">The $INDEX_ALLOCATION Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0450_the_bitmap_attribute">The $BITMAP Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0460_the_reparsepoint_at">The $REPARSE_POINT Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0470_symbolic_links">Symbolic Links</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0480_reparsing_feature">Reparsing Feature</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0490_the_eainformation_a">The $EA_INFORMATION and $EA Attributes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0500_the_loggedutilitys">The $LOGGED_UTILITY_STREAM Attribute</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0510_the_mftmirr">The $MFTMirr</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0520_logfile">$LogFile</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0530_ntfs_transaction_exam">NTFS Transaction Example</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0540_volume">$Volume</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0550_attrdef">$AttrDef</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0560_windows_xp_attrdef_e">Windows XP $AttrDef Example</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0570_ntfs_root_directory">NTFS Root Directory</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0580_ntfs_directories">NTFS Directories</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0590_ntfs_directory_attrib">NTFS Directory Attributes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0600_the_bitmap">The $Bitmap</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0610_the_boot">The $Boot</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0620_the_badclus">The $BadClus</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0630_the_secure">The $Secure</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0640_the_upcase">The $UpCase</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0650_the_extend">The $Extend</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0660_the_objid">The $ObjID</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0670_the_quota">The $Quota</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0680_disk_quotas">Disk Quotas</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0690_the_reparse">The $Reparse</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0700_ntfs_volume_reparse_">NTFS Volume Reparse (Mount) Points</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0710_the_usnjrnl">The $UsnJrnl</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0720_the_recycle_bin">The Recycle Bin</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0730_deleting_from_command">Deleting from Command Prompt</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0740_alternate_data_stream">Alternate Data Streams</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0750_ntfs_data_streams">NTFS Data Streams</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0760_alternate_data_stream">Alternate Data Streams, cont.</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0770_ntfs_compressed_files">NTFS Compressed Files</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0780_ntfs_compresion_detai">NTFS Compresion Details</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0790_files_with_zeroes">Files with Zeroes</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0800_ntfs_encrypting_file_">NTFS Encrypting File System (EFS)</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0810_ntfs_encryption_and_c">NTFS Encryption and CHNTPW</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0820_chntpw_boot_example">CHNTPW Boot Example</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0830_efs_basic_usage">EFS Basic Usage</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0840_efs_best_practices">EFS Best Practices</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0850_efs_recovery_for_lost">EFS Recovery for Lost Private Key</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0860_efs_details">EFS Details</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0870_ntfs_volume_shadow_co">NTFS Volume Shadow Copy</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0880_windows_volume_shadow">Windows Volume Shadow Copy Usage</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0890_clearing_the_restore_">Clearing the Restore Point History</a></li>
+            <li><a href="http://www.c-jump.com/bcc/t256t/Week04NtfsReview/Week04NtfsReview.html#W01_0900_ntfs_single_instance_">NTFS Single Instance Storage</a></li>
+        </ol>
+<a id="W01_0010_ntfs"></a>
+
+
+    <h3>
+        1. NTFS
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    New Technology File System, <strong>NTFS</strong> -- latest Windows file system.
+   </p>
+  </li>
+  <li>
+   <p>
+    Supports:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Large volume storage solution
+     </p>
+    </li>
+    <li>
+     <p>
+      High performance
+     </p>
+    </li>
+    <li>
+     <p>
+      System facility that repairs itself
+     </p>
+    </li>
+    <li>
+     <p>
+      Advanced file-level features:
+     </p>
+     <ul>
+      <li>
+       <p>
+        security
+       </p>
+      </li>
+      <li>
+       <p>
+        compression
+       </p>
+      </li>
+      <li>
+       <p>
+        auditing.
+       </p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Uses self-recovering disks.
+   </p>
+  </li>
+  <li>
+   <p>
+    See also
+    <br>
+    <a href="http://en.wikipedia.org/wiki/NTFS" target="_blank"><tt>http://en.wikipedia.org/wiki/NTFS</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0020_ntfs_features"></a>
+
+
+    <h3>
+        2. NTFS Features
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    <strong>Data security</strong> -- the capability to encrypt/decrypt files/folders.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>16-bit Unicode</strong> -- character set to name files and folders allows multiligual support for native languages for users around the world.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>Fault tolerance</strong> -- modifications recorded in a special log file - the <tt>$LogFile</tt>:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       If system crashes, NTFS examines the <tt>$LogFile</tt> and restores the disk to a consistent state with minimal data loss.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0030_ntfs_principals"></a>
+
+
+    <h3>
+        3. NTFS Principals
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    All data in NTFS file system is allocated to a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    The the first few sectors of the volume contain the boot sector and boot code.
+   </p>
+  </li>
+  <li>
+   <p>
+    Any sector beyond those can be allocated to a file.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0040_ntfs_principals_cont"></a>
+
+
+    <h3>
+        4. NTFS Principals, cont.
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    No dependence on underlying hardware:
+   </p>
+   <ul>
+    <li>
+     <p>
+      NTFS expects in new disk technologies that 512-byte sector isn't the only option
+     </p>
+    </li>
+    <li>
+     <p>
+      The cluster size can be specified when formatting the volume
+     </p>
+     <ul style="list-style-type:none;">
+      <li>
+       <p>
+         NOTE: File compression features <em>are not</em> available if the cluster size is greater than 4KB.
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      Volume size default cluster size
+     </p>
+     <ul>
+      <li>
+       <p>
+        512MB-1GB -- 1KB
+       </p>
+      </li>
+      <li>
+       <p>
+        1-2GB -- 2KB
+       </p>
+      </li>
+      <li>
+       <p>
+        2GB+ -- 4KB
+       </p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    No limit on file size
+   </p>
+  </li>
+  <li>
+   <p>
+    Native support for encryption, compression, recoverability
+   </p>
+  </li>
+  <li>
+   <p>
+    Flexible permissions on each file
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0050_ntfs_transactions_co"></a>
+
+
+    <h3>
+        5. NTFS Transactions, Compression, and Encryption
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    NTFS maintains a <strong>transaction log</strong> and <strong>change journal</strong>
+   </p>
+   <ul>
+    <li>
+     <p>
+      in the event of a failure NTFS automatically restores the consistency of the file system.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    NTFS can natively compress and encrypt files without the use of a separate application.
+   </p>
+  </li>
+  <li>
+   <p>
+    The file is
+   </p>
+   <ul>
+    <li>
+     <p>
+      encrypted/compressed during the file write, and
+     </p>
+    </li>
+    <li>
+     <p>
+      decrypted/uncompressed during the file read operation
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Compression/Encryption is transparent to user.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0060_ntfs_file_names_and_p"></a>
+
+
+    <h3>
+        6. NTFS File Names and Permissions
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    File permissions track users and groups and can prevent unauthorized access to a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    Additional time stamps and hard links were added.
+   </p>
+  </li>
+  <li>
+   <p>
+    In order to gain POSIX compliance, case sEnSiTiVe file names are used:
+   </p>
+   <ul>
+    <li>
+     <p>
+      FAT saved everything in uppercase
+     </p>
+    </li>
+    <li>
+     <p>
+      HPFS, while it did save the case of a file's name, referred to the same file no matter
+      how you mixed the case when opening it
+     </p>
+    </li>
+    <li>
+     <p>
+      Under NTFS
+     </p>
+<pre>    README.TXT
+    Readme.txt
+    readme.txt
+</pre>
+    </li>
+   </ul>
+   <p>
+    are all <em>different files</em>.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0070_ntfs_metrics_and_limi"></a>
+
+
+    <h3>
+        7. NTFS Metrics and Limitations
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Maximum cluster size is 64 KB
+   </p>
+  </li>
+  <li>
+   <p>
+    File names are limited to 255 UTF-16 characters
+   </p>
+  </li>
+  <li>
+   <p>
+    MBR disks only support partition sizes up to 2 TB
+   </p>
+  </li>
+  <li>
+   <p>
+    GPT volumes must be used to create NTFS volumes over 2 TB
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       NOTE: GPT partitions require 64-bit platform
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Presently, maximum NTFS file size is roughly 16 TB
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0080_ntfs_predecessors__f"></a>
+
+
+    <h3>
+        8. NTFS Predecessors - FAT12
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>FAT12</strong> - 12 bit allocation system used on floppy diskettes.
+   </p>
+   <ul>
+    <li>
+     <p>
+      Windows 2000 will default to formatting a very small volume (64MB flash card, for instance) with FAT12 to prevent waste of space for the overhead incurred with other file systems.
+     </p>
+    </li>
+    <li>
+     <p>
+      Every operating system uses FAT12 for floppies to allow for interoperability.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0090_ntfs_predecessors__f"></a>
+
+
+    <h3>
+        9. NTFS Predecessors - FAT16
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>FAT16</strong> - 16-bit allocation used on small (less than 2GB) hard drives.
+   </p>
+   <ul>
+    <li>
+     <p>
+      Was sufficient for small volumes on personal computers, but lacked the performance and stability needed for a file server.
+     </p>
+    </li>
+    <li>
+     <p>
+      The <em>8.3</em> file naming convention was a serious limitation that tormented users for years.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0100_ntfs_predecessors__f"></a>
+
+
+    <h3>
+        10. NTFS Predecessors - FAT32
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>FAT32</strong> - uses 32-bit allocation table to overcome size limitations on the 16-bit system.
+   </p>
+   <ul>
+    <li>
+     <p>
+      Above 500 MB, FAT16 required cluster sizes that started to induce large amounts of wasted slack space and performance lagged.
+     </p>
+    </li>
+    <li>
+     <p>
+      Introduced with Windows 95 OSR2, mainstreamed with Windows 98.
+     </p>
+    </li>
+    <li>
+     <p>
+      Long filename support provided as a horrendous kludge in a sequence of directory entry structures.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0110_ntfs_predecessors__h"></a>
+
+
+    <h3>
+        11. NTFS Predecessors - HPFS
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>HPFS</strong> - High Performance File System - built for speeed!
+   </p>
+   <ul>
+    <li>
+     <p>
+      Designed as a joint venture between Microsoft and IBM and included many marked improvements over FAT.
+     </p>
+    </li>
+    <li>
+     <p>
+      Improvements included
+     </p>
+     <ul>
+      <li>
+       <p>
+        long filename support,
+       </p>
+      </li>
+      <li>
+       <p>
+        512-byte allocation units (which almost completely did away with file slack),
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      The 386 version had nothing to do with CPU architecture, but rather used the name as the latest marketing buzzword meaning 'faster'.
+     </p>
+    </li>
+    <li>
+     <p>
+      It had a larger file I/O cache and some other minor improvements that resulted in a marked performance boost for the server version of OS/2.
+     </p>
+    </li>
+    <li>
+     <p>
+      But, it was released about the same time IBM and MS split and IBM had to pay royalties to MS anytime it sold HPFS386 so it was not widely used.
+     </p>
+    </li>
+    <li>
+     <p>
+      Windows support for this FS dropped with Windows 2000.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    See also
+    <br>
+    <a href="http://en.wikipedia.org/wiki/High_Performance_File_System" target="_blank"><tt>http://en.wikipedia.org/wiki/High_Performance_File_System</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0120_ntfs_finally"></a>
+
+
+    <h3>
+        12. NTFS, finally
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>NTFS</strong> - while many consider it a <em>new file system built from the ground up</em>, it is largely based on HPFS.
+   </p>
+   <ul>
+    <li>
+     <p>
+      NTFS incorporates all the features of HPFS and Macintosh's HFS and overcomes many performance and security issues they lacked.
+     </p>
+    </li>
+    <li>
+     <p>
+      Where HPFS performance starts degrading above 400 MB volumes, NTFS's performance theoretically doesn't drop off right up to
+      the theoretical volume limit of 16-Exabyte (2TB is the practical limit, but remains to be seen when drives get that big become mainstream.)
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    More info regarding NTFS comparison with its predecessors:
+    <br>
+    <a href="http://en.wikipedia.org/wiki/Comparison_of_file_systems" target="_blank"><tt>http://en.wikipedia.org/wiki/Comparison_of_file_systems</tt></a>
+    <br>
+    <a href="http://support.microsoft.com/kb/100108" target="_blank"><tt>http://support.microsoft.com/kb/100108</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0130_ntfs_partition_boot_s"></a>
+
+
+    <h3>
+        13. NTFS Partition Boot Sector
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Format program for NTFS volume allocates <strong>first 16 sectors</strong> for the <em>boot sector</em> followed by <em>bootstrap code</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    The first sector of NTFS partition is the boot sector, or VBR, the <em>volume boot record</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains file system type, size, and location of NTFS data.
+   </p>
+  </li>
+  <li>
+   <p>
+    Also contains boot code.
+   </p>
+  </li>
+  <li>
+   <p>
+    Also accessible by entry #7 in $MFT.
+   </p>
+  </li>
+  <li>
+   <p>
+    The boot sector is backed up at the end of the volume.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0140_ntfs_boot_sector_byte"></a>
+
+
+    <h3>
+        14. NTFS Boot Sector bytes
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <span style="color: blue">Offset</span>/Purpose:
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">0-2</span> three bytes of Jump instruction (Assembly code) to jump to boot code (mandatory in bootable partition.)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">3-10</span> OEM name in ASCII (OEM ID)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">11-12</span> Bytes per sector (BPB)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">13</span> Sectors per cluster
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">14-15</span> Reserved (Microsoft says to set this to 0)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">16-20</span> Unused (Microsoft says to set this to 0)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">21</span> Media descriptor
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">22-23</span> Unused (Microsoft says to set this to 0)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">24-31</span> Unused (Microsoft says that this is not checked)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">32-35</span> Unused (Microsoft says to set this to 0)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">36-39</span> Unused (Microsoft says that this is not checked)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">40-47</span> Total sectors in file system
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">48-55</span> Starting cluster address of $MFT
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">56-63</span> Starting cluster address of $MFT Mirror $DATA attribute
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">64</span> Size of MFT entry
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">65-67</span> Unused
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">68</span> Size of index record (directory entry)
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">69-71</span> Unused
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">72-79</span> Serial number
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">80-83</span> Unused
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">84-509</span> Bootstrap code
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">510-511</span> End of Sector Marker Signature (0xAA55 magic number)
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0150_master_file_table"></a>
+
+
+    <h3>
+        15. Master File Table
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    <tt>MFT</tt> is a unique, database-like structured file, named the <em>Master File Table</em>, internally <tt>$MFT</tt>.
+   </p>
+  </li>
+  <li>
+   <p>
+    The MFT contains a <strong>record</strong> for <em>every file</em> and <em>folder</em> on NTFS volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    First 16 entries in the MFT are reserved for NTFS metadata -- the <em>system files</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    File attributes, size, date/time stamps, and permissions are saved in <em>MFT entries</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    When number of files grows, the size of the MFT increases.
+   </p>
+  </li>
+  <li>
+   <p>
+    When a file is deleted, the <tt>$MFT</tt> entry is marked free (to be reused by a new file in the future.)
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0160_master_file_table_str"></a>
+
+
+    <h3>
+        16. Master File Table Structure
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <img src="./NTFS File System Overview_files/a02_mft_structure.png" alt="MFT Structure">
+  <li>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0170_master_file_table_pri"></a>
+
+
+    <h3>
+        17. Master File Table Principals
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Everything in NTFS is a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    The MFT is a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    The boot sector is a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    Directory entries are files that contain a list of other files.
+   </p>
+  </li>
+  <li>
+   <p>
+    NTFS was designed as a database. Microsoft's documentation says,
+    <em>"The MFT is a relational database that consists of rows of file records
+    and columns of file attributes. It contains at least one entry for every file on an
+    NTFS volume, including the MFT itself."</em>
+   </p>
+  </li>
+  <li>
+   <p>
+    Each MFT record is 1K (1024 bytes) long.
+   </p>
+  </li>
+  <li>
+   <p>
+    The only weakness of MFT aproach that it can grow to a very large size.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0180_mft_zone"></a>
+
+
+    <h3>
+        18. MFT Zone
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    The <strong>MFT Zone</strong> is a chunk of free space immediately following the $MFT.
+   </p>
+  </li>
+  <li>
+   <p>
+    MFT Zone is reserved for potential MFT growth.
+   </p>
+  </li>
+  <li>
+   <p>
+    Once free space in the original <tt>$MFT</tt> file is used up,
+    the MFT Zone is <em>divided in half</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    New file records are created in the bottom half (not near the original <tt>$MFT</tt>.)
+   </p>
+  </li>
+  <li>
+   <p>
+    If the entire MFT Zone is used up and the MFT still has to grow,
+    then the <tt>$MFT</tt> file becomes fragmented.
+   </p>
+  </li>
+  <li>
+   <p>
+    A fragmented <tt>$MFT</tt> file <em>cannot</em> be defragmented.
+   </p>
+   <p>
+    &nbsp;
+    <img src="./NTFS File System Overview_files/mft_zone.gif" alt="MFT Zone and MFT mirror copy">
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0190_ntfs_system_files"></a>
+
+
+    <h3>
+        19. NTFS system files
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre> MFT Sys File
+ Rec Name       Description
+ --- ---------- ---------------------------------------------------------------------------
+  0  $MFT.......<span style="color: blue">MFT 1</span>: file records on NTFS volume - an indef of every file.
+  1  $MftMirr...<span style="color: blue">MFT 2</span>: a backup of first 4 records of $MFT for recovery purposes.
+  2  $LogFile...<span style="color: blue">Log File</span>: the transaction log of recent file transactions for recovery purposes.
+  3  $Volume....<span style="color: blue">Volume</span>: volume information table - serial number, creation time, dirty flag.
+  4  $AttrDef...<span style="color: blue">Attribute definitions</span>: list of file attribute definitions.
+  5  "." .......<span style="color: blue">Root folder</span>: volume root folder (named ".")
+  6  $Bitmap....<span style="color: blue">Bitmap</span>: maps the availability (free/in-use) of the volume clusters.
+  7  $Boot......<span style="color: blue">VBR, the Boot sector</span>: used to mount the NTFS volume during the bootstrap process.
+  8  $BadClus...<span style="color: blue">Bad cluster file</span>: map of clusters with unrecoverable I/O errors.
+  9  $Secure....On Windows 2000 - <span style="color: blue">Security file</span>: the access control list with unique security descriptors for files.
+  9  $Quota.....<span style="color: blue">Quota Information</span> - the amount of space allowed for each user
+ 10  $UpCase....<span style="color: blue">Upcase table</span>: table to convert uppercase characters to lowercase Unicode characters for collating.
+ 11  $Extend....On Windows 2000 - <span style="color: blue">NTFS extension file</span>: Optional extensions like quotes and object identifiers.
+ 12-15..........Unused, but marked "in use"
+ 16-23..........Unused, but marked "unused"
+ Any.$Reparse...Reparse point information
+ Any.$UsnJrnl...Journaling of Encryption
+ s
+</pre>
+   <p>
+    NOTE: the record number of the MFT entry is often called the <em>inode</em>.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0200_ntfs_system_files_co"></a>
+
+
+    <h3>
+        20. NTFS system files, cont.
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    The system files remain hidden from the user on NTFS volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    They describe various pieces of the file system.
+   </p>
+  </li>
+  <li>
+   <p>
+    The MFT will always have at least 16 records, which are reserved for the system files.
+   </p>
+  </li>
+  <li>
+   <p>
+    The system files are records 0-11.
+   </p>
+  </li>
+  <li>
+   <p>
+    MFT records 12-15 are marked "in use", but are empty (reserved for future use.)
+   </p>
+  </li>
+  <li>
+   <p>
+    MFT records 16-23 are marked "not in use," but are never used.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0210_mft_entries"></a>
+
+
+    <h3>
+        21. MFT Entries
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Each $MFT entry (record) is 1,024 (0x400) bytes in length
+   </p>
+  </li>
+  <li>
+   <p>
+    Each MFT entry starts with a 42-byte sized header
+   </p>
+  </li>
+  <li>
+   <p>
+    Small files may be fully contained within an MFT records
+   </p>
+   <p>
+    &nbsp;
+    <img src="./NTFS File System Overview_files/a01_mft_entry.png" alt="MFT Entry">
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0220_mft_entry_format"></a>
+
+
+    <h3>
+        22. MFT Entry Format
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <span style="color: blue">Offset</span>/Purpose
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">0-3</span> Signature: ether <tt>FILE</tt> or <tt>BAAD</tt>, which denotes a bad entry.
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">4-5</span> Offset to fixup array
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">6-7</span> Number of entries in fixup array
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">8-15</span> $LogFile sequence number
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">16-17</span> Sequence value
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">18-19</span> Link count
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">20-21</span> Offset to first attribute
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">22-23</span> Flags:
+   </p>
+<pre>    0x00 not in use
+    0x01 in use
+    0x02 directory
+    0x03 directory in use
+</pre>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       Deleting a file changes the flag to 0x00, but does nothing to clear out
+      the data, thus many deleted file's metadata is still recoverable as long
+      as the record hasn't been recycled.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">24-27</span> Used size of MFT entry
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">28-31</span> Allocated size of MFT entry
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">32-39</span> File reference to base record
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">40-41</span> Next attribute identifier
+   </p>
+  </li>
+  <li>
+   <p>
+    <span style="color: blue">42-1,023</span> Attributes and fixup values
+   </p>
+   <p>
+    &nbsp;
+    <img src="./NTFS File System Overview_files/mft_entry.png" alt="MFT Entry Example">
+   </p>
+   <p>
+    Difference between NTFS 3.1 and previous NTFS versions
+    is the inclusion of the record number at
+    offset 0x2C. Due to this change, the byte after
+    the word 'FILE' changes the ASCII letter
+    from asterisk "*" to zero "0".
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0230_mft_attributes"></a>
+
+
+    <h3>
+        23. MFT Attributes
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    After the header, the remainder of the MFT entry contains attributes about the file.
+   </p>
+  </li>
+  <li>
+   <p>
+    All attributes have a <strong>header</strong> and <strong>data stream</strong> (i.e., contents.)
+   </p>
+  </li>
+  <li>
+   <p>
+    <em>Resident attribute</em> contents stored in the MFT entry with the header:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       stored within the MFT without the need for additional storage.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <em>Non-resident attribute</em> contents stored in external clusters.
+   </p>
+  </li>
+  <li>
+   <p>
+    A <strong>cluster run</strong> entry identifies the external clusters.
+    </p><hr>
+   <p></p>
+  </li>
+ </ul>
+
+
+<a id="W01_0240_mft_attribute_types"></a>
+
+
+    <h3>
+        24. MFT Attribute types
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre><span style="color: blue">Type</span> -- Attribute -- <span style="color: blue">Name</span> -- Purpose
+0x10 <span style="color: blue">16</span>....$STANDARD_INFORMATION --- <span style="color: blue">General information</span> --- flags, MAC times, owner, and security id.
+0x20 <span style="color: blue">32</span>....$ATTRIBUTE_LIST --- <span style="color: blue">Pointers</span> to other attributes and a list of nonresident attributes.
+0x30 <span style="color: blue">48</span>....$FILE_NAME --- <span style="color: blue">File name</span> --- (Unicode) and <em>outdated</em> <span style="color: blue">MAC times</span>
+0x40 <span style="color: blue">64</span>....$VOLUME_VERSION --- <span style="color: blue">Volume information</span> --- NTFS v1.2 only and Windows NT, no longer used
+0x40 <span style="color: blue">64</span>....$OBJECT_ID --- <span style="color: blue">16B unique identifier</span> --- for file or directory (NTFS 3.0+; Windows 2000+)
+0x50 <span style="color: blue">80</span>....$SECURITY_DESCRIPTOR --- <span style="color: blue">File's access control list</span> and <span style="color: blue">security properties</span>
+0x60 <span style="color: blue">96</span>....$VOLUME_NAME --- <span style="color: blue">Volume name</span>
+0x70 <span style="color: blue">112</span>...$VOLUME_INFORMATION --- <span style="color: blue">File system version</span> and other information
+0x80 <span style="color: blue">128</span>...$DATA --- <span style="color: blue">File contents</span>
+0x90 <span style="color: blue">144</span>...$INDEX_ROOT --- <span style="color: blue">Root node</span> of an index tree
+0xA0 <span style="color: blue">160</span>...$INDEX_ALLOCATION --- <span style="color: blue">Nodes of an index tree</span> --- with a root in $INDEX_ROOT
+0xB0 <span style="color: blue">176</span>...$BITMAP --- <span style="color: blue">Bitmap</span> --- for the $MFT file and for indexes (directories)
+0xC0 <span style="color: blue">192</span>...$SYMBOLIC_LINK --- <span style="color: blue">Soft link information</span> --- (NTFS v1.2 only and Windows NT)
+0xC0 <span style="color: blue">192</span>...$REPARSE_POINT --- Data about a <span style="color: blue">reparse point</span> --- used for a soft link (NTFS 3.0+; Windows 2000+)
+0xD0 <span style="color: blue">208</span>...$EA_INFORMATION --- Used for backward compatibility with OS/2 applications (HPFS)
+0xE0 <span style="color: blue">224</span>...$EA --- Used for backward compatibility with OS/2 applications (HPFS)
+0x100 <span style="color: blue">256</span>..$LOGGED_UTILITY_STREAM --- <span style="color: blue">Keys</span> and other information about encrypted attributes (NTFS 3.0+; Windows 2000+)
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0250_typical_mft_attribute"></a>
+
+
+    <h3>
+        25. Typical MFT Attributes
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    To allow basic file I/O, any <strong>file</strong> will have:
+   </p>
+   <ul>
+    <li>
+     <p>
+      <tt>$STANDARD_INFORMATION</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$FILE_NAME</tt> (two will exist if 8.3 name creation is turned on)
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$DATA</tt>
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Similarly, a <strong>directory</strong> will have:
+   </p>
+   <ul>
+    <li>
+     <p>
+      <tt>$STANDARD_INFORMATION</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$FILE_NAME</tt> (two will exist if 8.3 name creation is turned on)
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$INDEX_ROOT</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$INDEX_ALLOCATION</tt>
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Every MFT entry, file or directory, must have a <tt>$STANDARD_INFORMATION</tt> and at least one <tt>$FILE_NAME</tt>.
+   </p>
+  </li>
+  <li>
+   <p>
+    If the file name has more than 8 characters, there is a second <tt>$FILE_NAME</tt> attribute.
+   </p>
+  </li>
+  <li>
+   <p>
+    If file is empty, it will have the <tt>$DATA</tt> attribute with nothing in it.
+   </p>
+  </li>
+  <li>
+   <p>
+    Likewise, if directory is empty, it will have two index attributes
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0260_attribute_headers"></a>
+
+
+    <h3>
+        26. Attribute Headers
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Any standard NTFS attribute has a <em>header</em>:
+   </p>
+   <ul>
+    <li>
+     <p>
+      length, because attributes have variable lengths
+     </p>
+    </li>
+    <li>
+     <p>
+      optional name
+     </p>
+    </li>
+    <li>
+     <p>
+      flags
+     </p>
+    </li>
+    <li>
+     <p>
+      how to find it on disk (if the attribute resides elsewhere on disk -- not inside the MFT record)
+     </p>
+    </li>
+    <li>
+     <p>
+      etc.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0270_attribute_types"></a>
+
+
+    <h3>
+        27. Attribute Types
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     Attributes can be one of the following four types:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Resident and Named
+     </p>
+    </li>
+    <li>
+     <p>
+      Resident and Unnamed
+     </p>
+    </li>
+    <li>
+     <p>
+      Non-Resident and Named
+     </p>
+    </li>
+    <li>
+     <p>
+      Non-Resident and Unnamed
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0280_resident_unnamed_attr"></a>
+
+
+    <h3>
+        28. Resident Unnamed Attribute Type
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre> Offset Size Value Description
+ ------ ---- ----- --------------------------------
+ 0x00   4          Attribute Type (e.g. 0x10, 0x60)
+ 0x04   4          Length (including this header)
+ 0x08   1    0x00  Non-resident flag
+ 0x09   1    0x00  Name length
+ 0x0A   2    0x00  Offset to the Name
+ 0x0C   2    0x00  Flags
+ 0x0E   2          Attribute Id (a)
+ 0x10   4    L     Length of the Attribute
+ 0x14   2    0x18  Offset to the Attribute
+ 0x16   1          Indexed flag
+ 0x17   1    0x00  Padding
+ 0x18   L          The Attribute data
+
+(a) Each attribute has a unique identifier
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0290_resident_named_attrib"></a>
+
+
+    <h3>
+        29. Resident Named Attribute Type
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre>         Byte
+ Offset  Size Value   Description
+ ------  ---- -----   --------------------------------
+ 0x00    4            Attribute Type (e.g. 0x90, 0xB0)
+ 0x04    4            Length (including this header)
+ 0x08    1    0x00    Non-resident flag
+ 0x09    1    N       Name length
+ 0x0A    2    0x18    Offset to the Name
+ 0x0C    2    0x00    Flags
+ 0x0E    2            Attribute Id (a)
+ 0x10    4    L       Length of the Attribute
+ 0x14    2    2N+0x18 Offset to the Attribute (b)
+ 0x16    1            Indexed flag
+ 0x17    1    0x00    Padding
+ 0x18    2N   Unicode The Attribute's Name
+ 2N+0x18 L            The Attribute (c)
+
+(a) Resident attributes cannot be compressed
+(b) Each attribute has a unique identifier
+(c) Rounded up to a multiple of 4 bytes
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0300_nonresident_unnamed_"></a>
+
+
+    <h3>
+        30. Non-Resident Unnamed Attribute Type
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre> Byte    Byte
+ Offset  Size Value   Description
+ ------  ---- -----   --------------------------------
+ 0x00    4            Attribute Type (e.g. 0x20, 0x80)
+ 0x04    4            Length (including this header)
+ 0x08    1    0x01    Non-resident flag
+ 0x09    1    0x00    Name length
+ 0x0A    2    0x00    Offset to the Name
+ 0x0C    2            Flags
+ 0x0E    2            Attribute Id (a)
+ 0x10    8            Starting VCN
+ 0x18    8            Last VCN
+ 0x20    2    0x40    Offset to the Data Runs
+ 0x22    2            Compression Unit Size (b)
+ 0x24    4    0x00    Padding
+ 0x28    8            Allocated size of the attribute (c)
+ 0x30    8            Real size of the attribute
+ 0x38    8            Initialized data size of the stream (d)
+ 0x40   ...           Data Runs
+
+(a) Each attribute has a unique identifier
+(b) Compression unit size = 2x clusters. 0 implies uncompressed
+(c) This is the attribute size rounded up to the cluster size
+(d) Always equal to the allocated size?
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0310_nonresident_named_at"></a>
+
+
+    <h3>
+        31. Non-Resident Named Attribute Type
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre> Byte    Byte
+ Offset  Size Value   Description
+ ------  ---- -----   --------------------------------
+ 0x00     4           Attribute Type (e.g. 0x80, 0xA0)
+ 0x04     4           Length (including this header)
+ 0x08     1   0x01    Non-resident flag
+ 0x09     1   N       Name length
+ 0x0A     2   0x40    Offset to the Name
+ 0x0C     2           Flags
+ 0x0E     2           Attribute Id (a)
+ 0x10     8           Starting VCN
+ 0x18     8           Last VCN
+ 0x20     2   2N+0x40 Offset to the Data Runs (b)
+ 0x22     2           Compression Unit Size (c)
+ 0x24     4   0x00    Padding
+ 0x28     8           Allocated size of the attribute (d)
+ 0x30     8           Real size of the attribute
+ 0x38     8           Initialized data size of the stream (e)
+ 0x40     2N          Unicode The Attribute's Name
+ 2N+0x40 ...          Data Runs (b)
+
+(a) Each attribute has a unique identifier
+(b) Rounded up to a multiple of 4 bytes
+(c) Compression unit size = 2x clusters. 0 implies uncompressed
+(d) This is the attribute size rounded up to the cluster size
+(e) Always equal to the allocated size?
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0320_the_standardinforma"></a>
+
+
+    <h3>
+        32. The $STANDARD_INFORMATION Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x10 -- a required, first attribute in every file.
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains:
+   </p>
+   <ul>
+    <li>
+     <p>
+      MAC timestamps
+     </p>
+    </li>
+    <li>
+     <p>
+      DOS file permissions
+     </p>
+    </li>
+    <li>
+     <p>
+      Tracking info for version, logging, quota, security --
+     </p>
+     <ul style="list-style-type:none;">
+      <li>
+       <p>
+         Most of this extra info relates to optional functionality and is not normally turned on.
+       </p>
+      </li>
+     </ul>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0330_the_standardinforma"></a>
+
+
+    <h3>
+        33. The $STANDARD_INFORMATION DOS permissions
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre> Flag    Description
+ ------  --------------------
+ 0x0001  Read-Only
+ 0x0002  Hidden
+ 0x0004  System
+ 0x0020  Archive
+ 0x0040  Device
+ 0x0080  Normal
+ 0x0100  Temporary
+ 0x0200  Sparse File
+ 0x0400  Reparse Point
+ 0x0800  Compressed
+ 0x1000  Offline
+ 0x2000  Not Content Indexed
+ 0x4000  Encrypted
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+  ----------------------------------------------------
+
+
+<a id="W01_0340_ntfs_timestamps"></a>
+
+
+    <h3>
+        34. NTFS Timestamps
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    MAC times are stored in a number of places in an NTFS file entry
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$STANDARD_INFORMATION</tt> timestamps are kept current.
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$FILE_NAME</tt> timestamps are outdated!
+   </p>
+  </li>
+  <li>
+   <p>
+    <em>File access time</em> is the last time that the file was accessed in any way and has a granularity of 1 hour.
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       (This prevents constant excessive update to the metadata.)
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Windows converts
+   </p>
+   <ul>
+    <li>
+     <p>
+      the MAC times from the local time to UTC time, and stores UTC time.
+     </p>
+    </li>
+    <li>
+     <p>
+      UTC time to local time for display
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Interpretation problems occur if disk is examined on a system with a different time zone setting.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0350_the_attributelist_a"></a>
+
+
+    <h3>
+        35. The $ATTRIBUTE_LIST Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x20 -- if the are a lot of resident attributes and not enough space to fit them in the
+    MFT record, they are moved into <em>another MFT record</em>. The <tt>$ATTRIBUTE_LIST</tt> specifies how to find these additional MFT records.
+   </p>
+  </li>
+  <li>
+   <p>
+    This is a quite rare attribute, a couple examples might be
+   </p>
+   <ul>
+    <li>
+     <p>
+      A large file can be extremely fragmented, requiring <em>very long</em> runlist of data runs
+     </p>
+    </li>
+    <li>
+     <p>
+      A file has a lot of <em>named streams</em>
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0360_the_filename_attrib"></a>
+
+
+    <h3>
+        36. The $FILE_NAME Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x30 -- contains
+   </p>
+   <ul>
+    <li>
+     <p>
+      the inode number of the parent directory that contains this file. Parent Directory Reference has two parts:
+     </p>
+     <ul>
+      <li>
+       <p>
+        6 bytes for the inode number of the parent, and
+       </p>
+      </li>
+      <li>
+       <p>
+        2 bytes for an internal sequence number for NTFS integrity checks
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      Timestamps are repeated -- the same as in <tt>$STANDARD_INFORMATION</tt>, but here the timestamps are often out of sync:
+     </p>
+     <ul>
+      <li>
+       <p>
+        they <em>are not</em> updated unless the file name changes
+       </p>
+      </li>
+      <li>
+       <p>
+        only if the file is renamed, the times are also updated.
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      File size (file length)
+     </p>
+     <ul>
+      <li>
+       <p>
+        both the <strong>actual size</strong> of the file, and
+       </p>
+      </li>
+      <li>
+       <p>
+        the amount of disk space allocated -- the <strong>actual size + cluster slack</strong> are recorded.
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      Flags -- the same as in <tt>$STANDARD_INFORMATION</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      The name of the file. After the name, the entry is padded with 0x00 to an even 8 byte cutoff point.
+     </p>
+    </li>
+    <li>
+     <p>
+      NOTE: If 8.3 file name creation is turned on, any files with long names will have a second <tt>$FILE_NAME</tt> attribute that
+      contains the short name.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0370_the_objectid_attrib"></a>
+
+
+    <h3>
+        37. The $OBJECT_ID Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x40 -- specifies an ID that allows tracking the file in the event if its name or location changes.
+   </p>
+  </li>
+  <li>
+   <p>
+    Mostly use by Microsoft Office embedded documents (aka compound files.)
+   </p>
+  </li>
+  <li>
+   <p>
+    Every file that has <tt>$OBJECT_ID</tt> will have it registered in <tt>$ObjId</tt> system file.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0380_the_securitydescrip"></a>
+
+
+    <h3>
+        38. The $SECURITY_DESCRIPTOR Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x50 -- tracks the owner of the file and pemissions granted by that owner to everyone else.
+   </p>
+  </li>
+  <li>
+   <p>
+    The structure changes depending on how many and what type of Access Control Lists (ACL) are present on
+    the file. Possible entries are:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Attribute header
+     </p>
+    </li>
+    <li>
+     <p>
+      Revision
+     </p>
+    </li>
+    <li>
+     <p>
+      Flags
+     </p>
+    </li>
+    <li>
+     <p>
+      Offset to user SID
+     </p>
+    </li>
+    <li>
+     <p>
+      Offset to group SID
+     </p>
+    </li>
+    <li>
+     <p>
+      Offset to SACL
+     </p>
+    </li>
+    <li>
+     <p>
+      Offset to DACL
+     </p>
+    </li>
+    <li>
+     <p>
+      DACL
+     </p>
+    </li>
+    <li>
+     <p>
+      user SID
+     </p>
+    </li>
+    <li>
+     <p>
+      group SID
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0390_the_volumename_attr"></a>
+
+
+    <h3>
+        39. The $VOLUME_NAME Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x60 -- contains the volume name
+   </p>
+  </li>
+  <li>
+   <p>
+    Because drive letters such as C: or D: etc. aren't descriptive enough.
+   </p>
+  </li>
+  <li>
+   <p>
+    Allows NTFS volumes to have long names with special characters in different languages.
+   </p>
+  </li>
+  <li>
+   <p>
+    Prior to <tt>$VOLUME_NAME</tt> the only alternative was an "OEM label" located in the boot sector.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0400_the_volumeinformati"></a>
+
+
+    <h3>
+        40. The $VOLUME_INFORMATION Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x70 -- contains info about the volume:
+   </p>
+   <ul>
+    <li>
+     <p>
+      NTFS version number, e.g. 1.2 or 3.1 NTFS version
+     </p>
+    </li>
+    <li>
+     <p>
+      Flags:
+     </p>
+<pre> Value  Description
+ ------ -------------------
+ 0x0001 Dirty
+ 0x0002 Resize LogFile
+ 0x0004 Upgrade on Mount
+ 0x0008 Mounted on NT4
+ 0x0010 Delete USN underway
+ 0x0020 Repair Object Ids
+ 0x8000 Modified by chkdsk
+</pre>
+     <p>
+      If the dirty flag is set, on the next reboot <tt>chkdsk /f</tt> will run.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0410_the_data_attribute"></a>
+
+
+    <h3>
+        41. The $DATA Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x80 -- contains the actual file content -- user data
+   </p>
+  </li>
+  <li>
+   <p>
+    Can be any of the four possible attribute types:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Resident and Named
+     </p>
+    </li>
+    <li>
+     <p>
+      Resident and Unnamed (if the file is small enough to fit in MFT entry)
+     </p>
+    </li>
+    <li>
+     <p>
+      Non-Resident and Named
+     </p>
+    </li>
+    <li>
+     <p>
+      Non-Resident and Unnamed (most common)
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0420_runlists"></a>
+
+
+    <h3>
+        42. Runlists
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    A runlist is used to point to a set of clusters associated with a <em>non-resident</em> attribute of a file
+   </p>
+  </li>
+  <li>
+   <p>
+    Processing the runlists allows for the assembly of the file from the clusters comprising the contents.
+   </p>
+  </li>
+  <li>
+   <p>
+    Specifies
+   </p>
+   <ol>
+    <li>
+     <p>
+       cluster offset
+     </p>
+    </li>
+    <li>
+     <p>
+      length of a run
+     </p>
+    </li>
+   </ol>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0430_the_indexroot_attri"></a>
+
+
+    <h3>
+        43. The $INDEX_ROOT Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x90 -- establishes top-level parameters for the index:
+   </p>
+   <ul>
+    <li>
+     <p>
+      collation rules
+     </p>
+    </li>
+    <li>
+     <p>
+      entry size
+     </p>
+    </li>
+    <li>
+     <p>
+      length of entire index
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0440_the_indexallocation"></a>
+
+
+    <h3>
+        44. The $INDEX_ALLOCATION Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0xA0 -- describes components that make up the index:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       storage containers for B-tree components
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    The <tt>$INDEX_ALLOCATION</tt> attribute is named to correlate with the <tt>$BITMAP</tt> attribute to a specific index, because some files with indexes can have multiple indexes.
+   </p>
+  </li>
+  <li>
+   <p>
+    Always a non-resident attribute. If index is small enough to fit in MFT entry, then <tt>$INDEX_ROOT</tt> is used instead.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0450_the_bitmap_attribute"></a>
+
+
+    <h3>
+        45. The $BITMAP Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0xB0 -- used with <tt>$INDEX_ALLOCATION</tt> attributes and in <tt>$MFT</tt> entries
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains string of bits that correlates to a set of records
+   </p>
+  </li>
+  <li>
+   <p>
+    Purpose: to show which entries are in use and which are free
+   </p>
+  </li>
+  <li>
+   <p>
+    Note that individual entries in <tt>$MFT</tt> have their own marking of free or in use, but bitmaps allow for quick view of the whole structure with multiple records.
+   </p>
+  </li>
+  <li>
+   <p>
+    This attribute is named so the bitmap is correlated to a specific index, since some files with indexes can have multiple indexes.
+   </p>
+  </li>
+  <li>
+   <p>
+    For example, a bitmap
+   </p>
+<pre>    0x7FFF =
+    0111111111111111 =
+</pre>
+   <p>
+    means that the first entry is not is use; next 15 are in use.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0460_the_reparsepoint_at"></a>
+
+
+    <h3>
+        46. The $REPARSE_POINT Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0xC0<sup>(*)</sup> -- allows the <tt>$MFT</tt> entry to be re-processed in another way, if compared to a regular file.
+   </p>
+  </li>
+  <li>
+   <p>
+    When opening a file is taking place, it is processed in a "normal way." Then, if <tt>$REPARSE_POINT</tt> attribute is found, the file is "re-processed" as
+   </p>
+   <ul>
+    <li>
+     <p>
+      symbolic link
+     </p>
+    </li>
+    <li>
+     <p>
+      volume mount point
+     </p>
+    </li>
+    <li>
+     <p>
+      remote storage service
+     </p>
+    </li>
+   </ul>
+   <p>
+    __________________
+    <br>
+    <sup>(*)</sup> In NTFS version 1.x this attribute was named <tt>$SYMBOLIC_LINK</tt>, but later the functionality was broadened and now we have the <tt>$REPARSE_POINT</tt>.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0470_symbolic_links"></a>
+
+
+    <h3>
+        47. Symbolic Links
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    A <strong>Symbolic Link</strong> is not the same as <strong>Hard Link</strong>. A <em>Hard Linked file</em> has two file names and editing either name updates the same data.
+   </p>
+  </li>
+  <li>
+   <p>
+    A <strong>Symbolic Link</strong> is a <em>separate file</em> that contains <em>no data</em>, only a pointer to the other file.
+   </p>
+  </li>
+  <li>
+   <p>
+    If a <strong>Symbolic Link</strong> file is opened for reading, the <tt>$REPARSE_POINT</tt> attribute is processed and the
+    file system will open a different file specified there.
+   </p>
+  </li>
+  <li>
+   <p>
+    See also
+    <br>
+    <a href="http://en.wikipedia.org/wiki/NTFS_symbolic_link" target="_blank"><tt>http://en.wikipedia.org/wiki/NTFS_symbolic_link</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0480_reparsing_feature"></a>
+
+
+    <h3>
+        48. Reparsing Feature
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Reparsing is a very powerful feature of NTFS
+   </p>
+  </li>
+  <li>
+   <p>
+    The "reparsing" is very flexible and can be extended into almost any kind of action
+   </p>
+  </li>
+  <li>
+   <p>
+    There are several "canned" reparse point types, but a <em>driver</em> can be written to do anything and a file can be "reparsed" however that driver wants to "read" it.
+   </p>
+  </li>
+  <li>
+   <p>
+    This can allow the same data to be read different ways, depending on the <em>variables</em> sent to the driver.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0490_the_eainformation_a"></a>
+
+
+    <h3>
+        49. The $EA_INFORMATION and $EA Attributes
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Types 0xD0 and 0xE0 -- outdated.
+   </p>
+  </li>
+  <li>
+   <p>
+    They used to implementextended HPFS attributes on OS/2 and WinNT server.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0500_the_loggedutilitys"></a>
+
+
+    <h3>
+        50. The $LOGGED_UTILITY_STREAM Attribute
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Type 0x100 -- layout and treatment is similar to <tt>$DATA</tt> attribute
+   </p>
+  </li>
+  <li>
+   <p>
+    Every EFS encrypted file will have this attribute to store the file encryption key used during encryption/decryption
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0510_the_mftmirr"></a>
+
+
+    <h3>
+        51. The $MFTMirr
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    The purpose of this file is to backup the starting point of the <tt>$MFT</tt>.
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$MFTMirr</tt> is usually located half way through the volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    It only contains the vital records needed to get the $MFT readable again.
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$MFTMirr</tt> is always either 4 records, or one cluster.
+   </p>
+  </li>
+  <li>
+   <p>
+    Generally, the record size in the MFT is 1024 bytes and the cluster size of the drive is 4048 bytes.
+   </p>
+  </li>
+  <li>
+   <p>
+    In 90% of cases the <tt>$MFTMirr</tt> will contain 4 MFT records.
+   </p>
+  </li>
+  <li>
+   <p>
+    In case of the cluster size being smaller than 4K, <tt>$MFTMirr</tt> occupies as many clusters as necessary to accommodate first 4 records of the MFT
+   </p>
+  </li>
+  <li>
+   <p>
+    If the cluster size is bigger than 4K, then there is more room, and it may contain more than 4 records.
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       (Since having clusters larger than 4K breaks some of the other features, such as compression, this rarely occurs.)
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    If MFT starting sector fails,
+   </p>
+   <ul>
+    <li>
+     <p>
+      the whole $MFT would become unreadable
+     </p>
+    </li>
+    <li>
+     <p>
+      the pointer to the <tt>$MFTMirr</tt> would also be lost, so it's hard to determine what really does the <tt>$MFTMirr</tt> gain.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0520_logfile"></a>
+
+
+    <h3>
+        52. $LogFile
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    All instances of access to the objects on disk are considered series of <em>transactions</em> on NTFS.
+    <tt>$LogFile</tt> records transaction progress.
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains detailed info only about <em>recent</em> transactions -- it scrolls around in a circular fashion -- therefore, it's not the whole volume history.
+   </p>
+  </li>
+  <li>
+   <p>
+    Once the log is full, the first entry is overwritten with the next new entry.
+   </p>
+  </li>
+  <li>
+   <p>
+    Located at inode #2 of the <tt>$MFT</tt>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0530_ntfs_transaction_exam"></a>
+
+
+    <h3>
+        53. NTFS Transaction Example
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     When a program is modifying a file, the following steps might occur:
+   </p>
+   <ol>
+    <li>
+     <p>
+       read MFT entry for directory entry file is in
+     </p>
+    </li>
+    <li>
+     <p>
+      read directory entry file is in
+     </p>
+    </li>
+    <li>
+     <p>
+      read MFT record for file
+     </p>
+    </li>
+    <li>
+     <p>
+      write file
+     </p>
+    </li>
+    <li>
+     <p>
+      update A time in file's MFT record
+     </p>
+    </li>
+    <li>
+     <p>
+      update M time in file's MFT record
+     </p>
+    </li>
+    <li>
+     <p>
+      update A time in directory entry for that file
+     </p>
+    </li>
+    <li>
+     <p>
+      update M time in directory entry for that file
+     </p>
+    </li>
+   </ol>
+  </li>
+  <li>
+   <p>
+    The list gets considerably longer if the file is encrypted or compressed.
+   </p>
+  </li>
+  <li>
+   <p>
+    If the program fails before all transaction steps are complete due to a crash,
+    the system <span style="color: blue">rolls back to the previous values in order to maintain
+    consistency of the file system.
+   </span></p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       NOTE: This is not to be confused with running CHKDSK. NTFS itself is providing a reliable, crash-resilient environment.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0540_volume"></a>
+
+
+    <h3>
+        54. $Volume
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located at inode #3 of the <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains
+   </p>
+   <ul>
+    <li>
+     <p>
+      NTFS volume name
+     </p>
+    </li>
+    <li>
+     <p>
+      NTFS version number
+     </p>
+    </li>
+    <li>
+     <p>
+      Flags to signal operations to performed on boot:
+     </p>
+     <ul>
+      <li>
+       <p>
+        run CHKDSK
+       </p>
+      </li>
+      <li>
+       <p>
+        upgrade to new version
+       </p>
+      </li>
+      <li>
+       <p>
+        resize the log file
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      contains VOLUME_INFORMATION attribute, which provides
+     </p>
+     <ul>
+      <li>
+       <p>
+        major (1 or 3) and a minor version number of NTFS
+       </p>
+      </li>
+      <li>
+       <p>
+        flags:
+       </p>
+<pre> Value   Description
+ ------  -------------------
+ 0x0001  Dirty (<span style="color: blue">chkdsk /f</span> needs to be run on the next boot)
+ 0x0002  Resize LogFile
+ 0x0004  Upgrade on Mount
+ 0x0008  Mounted on NT4
+ 0x0010  Delete USN underway
+ 0x0020  Repair Object Ids
+ 0x8000  Modified by chkdsk
+</pre>
+      </li>
+     </ul>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0550_attrdef"></a>
+
+
+    <h3>
+        55. $AttrDef
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located at inode #4 of the <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains list of attributes availble on this version of NTFS.
+   </p>
+  </li>
+  <li>
+   <p>
+    For each attribute, the following info is provided:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Attribute name
+     </p>
+    </li>
+    <li>
+     <p>
+      ID
+     </p>
+    </li>
+    <li>
+     <p>
+      Usage rules (currently not in use)
+     </p>
+    </li>
+    <li>
+     <p>
+      Flags
+     </p>
+<pre>0x02 = Indexed
+0x40 = always Resident
+0x80 = can be Non-resident
+</pre>
+    </li>
+    <li>
+     <p>
+      Max size
+     </p>
+    </li>
+    <li>
+     <p>
+      Min size
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0560_windows_xp_attrdef_e"></a>
+
+
+    <h3>
+        56. Windows XP $AttrDef Example
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+<pre>                                        Min   Max
+ Type Name                   Flags IRN  Size  Size
+ ---- ---------------------- ----- ---  ----  ----
+ 0x10 $STANDARD_INFORMATION  0x40  R    0x30  0x48
+ 0x20 $ATTRIBUTE_LIST        0x80  N
+ 0x30 $FILE_NAME             0x42  IR   0x44  0x242
+ 0x40 $OBJECT_ID             0x40  R          0x100
+ 0x50 $SECURITY_DESCRIPTOR   0x80  N
+ 0x60 $VOLUME_NAME           0x40  R    0x2   0x100
+ 0x70 $VOLUME_INFORMATION    0x40  R    0xC   0xC
+ 0x80 $DATA                  0x00
+ 0x90 $INDEX_ROOT            0x40  R
+ 0xA0 $INDEX_ALLOCATION      0x80  N
+ 0xB0 $BITMAP                0x80  N
+ 0xC0 $REPARSE_POINT         0x80  N    0x4000
+ 0xD0 $EA_INFORMATION        0x40  R    0x8   0x8
+ 0xE0 $EA                    0x00             0x10000
+ 0xF0 $PROPERTY_SET
+0x100 $LOGGED_UTILITY_STREAM 0x80  N          0x10000
+
+                             0x40 = always Resident
+                             0x80 = can be Non-resident
+</pre>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0570_ntfs_root_directory"></a>
+
+
+    <h3>
+        57. NTFS Root Directory
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located at inode #5 of the <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    Named "."
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0580_ntfs_directories"></a>
+
+
+    <h3>
+        58. NTFS Directories
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    NTFS directories are stored in files
+   </p>
+  </li>
+  <li>
+   <p>
+    Directory attribute is set in the header
+   </p>
+  </li>
+  <li>
+   <p>
+    All attributes are assigned the name <tt>$I30</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    $MFT entry 5 points to Root Directory (named <tt>"."</tt>)
+   </p>
+  </li>
+  <li>
+   <p>
+    Root Directory points to subdirectories
+   </p>
+  </li>
+  <li>
+   <p>
+    Information is stored in a <em>balanced tree</em> structure
+   </p>
+  </li>
+  <li>
+   <p>
+    Balanced tree facilitates sorting, storing, and retrieval of information.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0590_ntfs_directory_attrib"></a>
+
+
+    <h3>
+        59. NTFS Directory Attributes
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    <tt>$INDEX_ROOT</tt>:
+   </p>
+   <ul>
+    <li>
+     <p>
+      is a resident attribute of a directory entry
+     </p>
+    </li>
+    <li>
+     <p>
+      stores a single node with a small number of index entries.
+     </p>
+    </li>
+    <li>
+     <p>
+      Always the root of the index tree
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <tt>$INDEX_ALLOCATION</tt>:
+   </p>
+   <ul>
+    <li>
+     <p>
+      is a non-resident attribute of a directory entry (due to a potentially large index structure.)
+     </p>
+    </li>
+    <li>
+     <p>
+      Stores as many index records as required for directory
+     </p>
+    </li>
+    <li>
+     <p>
+      Each index record is usually 4,096 bytes in size
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0600_the_bitmap"></a>
+
+
+    <h3>
+        60. The $Bitmap
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    <tt>$Bitmap</tt> file describes the allocation status of each cluster in the file system
+   </p>
+  </li>
+  <li>
+   <p>
+    Entry #6 in $MFT
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$DATA</tt> attribute in the file contains a string of bytes where each bit indicates whether the corresponding cluster is
+   </p>
+   <ul>
+    <li>
+     <p>
+      available (0) or
+     </p>
+    </li>
+    <li>
+     <p>
+      allocated (1)
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    The size of <tt>$DATA</tt> is always a multiple of 8. Since each byte contains 8 bits, this is equivalent to saying that NTFS bitmap describes the disk in chunks of 64 clusters.
+    However, in most cases the real size of a disk <em>is not</em> a multiple of 64 NTFS clusters.
+    To avoid a mapping mismatch, there is usually a section at the end of the <tt>$Bitmap</tt> file that corresponds to the space beyond the end of the drive, and all bits of that section
+    are always marked as 1.
+   </p>
+  </li>
+  <li>
+   <p>
+    The <tt>$DATA</tt> attribute is always non-resident.
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>$BITMAP</tt> attribute is used to describe the allocation status of index records and MFT entries.
+   </p>
+  </li>
+  <li>
+   <p>
+    The Defrag utility would want each byte in the bitmap to be either 0x00 or 0xFF. Anything else is "a hole" requiring a defragmentation.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0610_the_boot"></a>
+
+
+    <h3>
+        61. The $Boot
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Entry #7 in $MFT
+   </p>
+  </li>
+  <li>
+   <p>
+    Although appears as a regular file, the non-resident $DATA attribute points to the volume boot record (VBR), located in sector zero on NTFS volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    Allows to bypass the file system to access the VBR without having to write special code and do the work via normal system API calls.
+   </p>
+  </li>
+  <li>
+   <p>
+    There is information in the VBR that certain utilities need, like BIOS parameter block, including
+   </p>
+   <ul>
+    <li>
+     <p>
+      volume serial number, and
+     </p>
+    </li>
+    <li>
+     <p>
+      cluster numbers of <tt>$MFT</tt> and <tt>$MFTMirr</tt>.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <tt>$Boot</tt> is usually 8192 bytes long.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0620_the_badclus"></a>
+
+
+    <h3>
+        62. The $BadClus
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Entry #8 in <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    Tracks bad clusters in volume
+   </p>
+  </li>
+  <li>
+   <p>
+    Cluster is bad if at least one sector is bad
+   </p>
+  </li>
+  <li>
+   <p>
+    The <tt>$Bitmap</tt> marks bad clusters as 1-in use, preventing other files from trying to use the bad cluster in the future.
+   </p>
+  </li>
+  <li>
+   <p>
+    The <tt>$BadClus</tt> has the size of the NTFS volume:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Organized as a sparse file of <em>all zeros</em>
+     </p>
+    </li>
+    <li>
+     <p>
+      Zeros in sparse files are <em>counted</em> instead of saved
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$BadClus</tt> takes no space on the disk: if a cluster becomes bad, the data is written into <tt>$BadClus</tt> instead at the same offset as if it was written on disk.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    See also
+    <br>
+    <a href="http://en.wikipedia.org/wiki/Sparse_file" target="_blank"><tt>http://en.wikipedia.org/wiki/Sparse_file</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0630_the_secure"></a>
+
+
+    <h3>
+        63. The $Secure
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Entry #9 in <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains
+   </p>
+   <ul>
+    <li>
+     <p>
+      index for every file owner, <tt>$SII</tt> - Standard Information ID
+     </p>
+    </li>
+    <li>
+     <p>
+      index pointing to the Access Control List (ACL), <tt>$SDH</tt> Security Descriptor Hash
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    In Windows NT, every file had a <tt>$Security_Descriptor</tt> attribute storing this info. Since many files had the
+    same values in this attribute, it was moved out to this file so that data wasn't repeated.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0640_the_upcase"></a>
+
+
+    <h3>
+        64. The $UpCase
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Entry #10 in <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    The size is 128 KB
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains every uppercase character in UNICODE alphabet
+   </p>
+  </li>
+  <li>
+   <p>
+    Allows to compare and sort filenames without the need to switch to a particular Windows code page:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       The case in the file name is always preserved, but the file name is converted to all UPPERCASE for sorting when the directory entry is created for the file.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0650_the_extend"></a>
+
+
+    <h3>
+        65. The $Extend
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Entry #11 in <tt>$MFT</tt>
+   </p>
+  </li>
+  <li>
+   <p>
+    This is a <em>directory</em> containing the various optional system files (aka extensions):
+   </p>
+   <ul>
+    <li>
+     <p>
+      <tt>$ObjID</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$Quota</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$Reparse</tt>
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$UsnJrnl</tt>
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Although these four files could have all been given their own unique Inodes, <tt>$Extend</tt> spares them for other system files.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0660_the_objid"></a>
+
+
+    <h3>
+        66. The $ObjID
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located in <tt>$Extend</tt> directory
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains index of each file that has an <tt>$Object_ID</tt> attribute
+   </p>
+  </li>
+  <li>
+   <p>
+    This allows files to be tracked by <tt>$Object_ID</tt> instead of the file name:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       Most commonly used by Office documents, which can be linked and then the files can be renamed by the user without breaking the links of the compound Office file.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0670_the_quota"></a>
+
+
+    <h3>
+        67. The $Quota
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located in <tt>$Extend</tt> directory (on Windows NT was inode #9)
+   </p>
+  </li>
+  <li>
+   <p>
+    Tracks how much space on the volume is allocated by every user.
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains two indexes:
+   </p>
+   <ul>
+    <li>
+     <p>
+      <tt>$O</tt> contains an entry for everyone that has a quota enforced on them.
+     </p>
+    </li>
+    <li>
+     <p>
+      <tt>$Q</tt> has an entry for every user login on the system.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    When a file is accessed,
+   </p>
+   <ol>
+    <li>
+     <p>
+       A lookup is done in <tt>$O</tt> for the file owner to see if they have a quota
+     </p>
+    </li>
+    <li>
+     <p>
+      A lookup is done in <tt>$Q</tt> to see what the quota is.
+     </p>
+    </li>
+   </ol>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0680_disk_quotas"></a>
+
+
+    <h3>
+        68. Disk Quotas
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    On NTFS the amount of space allowed for <em>each user</em> can be enforced at the file system level.
+   </p>
+  </li>
+  <li>
+   <p>
+    When a limit is set, it applies to <em>all users</em> on <em>all volumes</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    A <strong>warning level</strong> and a <strong>quota limit</strong> are set, the users are unpleasantly notified 
+    that they are above the warning level.
+   </p>
+  </li>
+  <li>
+   <p>
+    The users are "physically" prevented from writing to the volume if over the limit.
+   </p>
+  </li>
+  <li>
+   <p>
+    Quota is checked <em>before</em> NTFS compression is applied, so the limit is the logical size of the file -- not the amount of disk space it takes.
+   </p>
+  </li>
+  <li>
+   <p>
+    Support for disk quotas is not available in Basic, Home and Media Center versions of Windows.
+   </p>
+  </li>
+  <li>
+   <p>
+    Quotas must be <em>activated</em> after installation of Professional, Ultimate and Server versions of Windows.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0690_the_reparse"></a>
+
+
+    <h3>
+        69. The $Reparse
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located in <tt>$Extend</tt> directory
+   </p>
+  </li>
+  <li>
+   <p>
+    Contains index for all <em>reparse points</em> on the volume
+   </p>
+  </li>
+  <li>
+   <p>
+    Allows to mount a portion of the file system as another volume
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0700_ntfs_volume_reparse_"></a>
+
+
+    <h3>
+        70. NTFS Volume Reparse (Mount) Points
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Reparse points are similar to Unix Mount Points &nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="./NTFS File System Overview_files/mount_point.gif" alt="NTFS Volume Mount Points">
+   </p>
+  </li>
+  <li>
+   <p>
+    Directory on NTFS is actually a root of another volume
+   </p>
+  </li>
+  <li>
+   <p>
+    Allows a <em>directory tree</em> to replace multiple drive letters
+   </p>
+  </li>
+  <li>
+   <p>
+    Similar to multiple hard drives, CD/DVD ROM, and floppy drives
+    as they appear as subdirectories on Unix as a <em>single tree</em>:
+   </p>
+<pre>    /dev/hda
+    /dev/hdb
+    /dev/cdrom
+    /dev/floppy
+
+</pre>
+   <p>
+    Those same four devices would be appearing as C:, D:, E:, A:, respectively, on Windows.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0710_the_usnjrnl"></a>
+
+
+    <h3>
+        71. The $UsnJrnl
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Located in <tt>$Extend</tt> directory
+   </p>
+  </li>
+  <li>
+   <p>
+    Similar to <tt>$LogFile</tt>, tracks changes that occur on files
+   </p>
+  </li>
+  <li>
+   <p>
+    Short-term repository:
+   </p>
+   <ol>
+    <li>
+     <p>
+       some application requests to log the changes via system API
+     </p>
+    </li>
+    <li>
+     <p>
+      The application reads captured info
+     </p>
+    </li>
+    <li>
+     <p>
+      NTFS empties the <tt>$UsnJrnl</tt> file
+     </p>
+    </li>
+   </ol>
+  </li>
+  <li>
+   <p>
+    Often called the <em>Change Journal</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    Useful for
+   </p>
+   <ul>
+    <li>
+     <p>
+      file replication/mirroring applications
+     </p>
+    </li>
+    <li>
+     <p>
+      tracking of which files to include in an incremental backup
+     </p>
+    </li>
+    <li>
+     <p>
+      virus scanners
+     </p>
+    </li>
+    <li>
+     <p>
+      etc.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    The file normally will appear empty: the data exists only while it is being used and goes away as soon as the program that needed it no longer does.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0720_the_recycle_bin"></a>
+
+
+    <h3>
+        72. The Recycle Bin
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Deleted files are moved to the Recycle Bin in the <strong>RECYCLER</strong> directory
+   </p>
+  </li>
+  <li>
+   <p>
+    Files are renamed in the format <tt>Dx#.ext</tt>, where
+   </p>
+   <ul>
+    <li>
+     <p>
+      x = lowercase drive letter from where the file was deleted
+     </p>
+    </li>
+    <li>
+     <p>
+      # = sequence number of the order in which the file was deleted
+     </p>
+    </li>
+    <li>
+     <p>
+      ext = original file extension
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Every user who has deleted at least one file has an individual subdirectory, named with the user's SID
+   </p>
+  </li>
+  <li>
+   <p>
+    User's subdirectory contains <tt>desktop.ini</tt>, <tt>INFO2</tt>, and any files that this user has deleted.
+   </p>
+  </li>
+  <li>
+   <p>
+    <tt>INFO2</tt> file:
+   </p>
+   <ul>
+    <li>
+     <p>
+      keeps a lists of all files in the RECYCLER subdirectory.
+     </p>
+    </li>
+    <li>
+     <p>
+      stores the original path/file name.
+     </p>
+    </li>
+    <li>
+     <p>
+      contains ASCII data, Unicode data, and date/time of deletion for each deleted file or folder.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Once created, user's subdirectory is never deleted.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0730_deleting_from_command"></a>
+
+
+    <h3>
+        73. Deleting from Command Prompt
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    When a file is deleted at the command prompt,
+   </p>
+   <ol>
+    <li>
+     <p>
+       The file <em>does not</em> go into the Recycle Bin.
+     </p>
+    </li>
+    <li>
+     <p>
+      Part of the file or the complete file can be recovered using forensic tools.
+     </p>
+    </li>
+   </ol>
+  </li>
+  <li>
+   <p>
+    Tasks performed by the operating system (also when a file is permanently deleted from the Recycle Bin):
+   </p>
+   <ul>
+    <li>
+     <p>
+      The clusters are made available for new data.
+     </p>
+    </li>
+    <li>
+     <p>
+      The MFT attribute <tt>$BITMAP</tt> is updated.
+     </p>
+    </li>
+    <li>
+     <p>
+      File attributes of the MFT are marked as available.
+     </p>
+    </li>
+    <li>
+     <p>
+      Any connections to the inodes and VFN/LCN cluster locations are removed.
+     </p>
+    </li>
+    <li>
+     <p>
+      The list of links to the cluster locations is deleted.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0740_alternate_data_stream"></a>
+
+
+    <h3>
+        74. Alternate Data Streams
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Alternate data streams (ADS) allow more than one data stream to be associated with a filename
+   </p>
+  </li>
+  <li>
+   <p>
+    The filename format is
+   </p>
+<pre>    filename:streamname
+</pre>
+   <p>
+    For example,
+   </p>
+<pre>    "text.txt:extrastream"
+</pre>
+   <p>
+    Alternate streams are not listed in Windows Explorer
+   </p>
+  </li>
+  <li>
+   <p>
+    The size of data in alternate streams <em>is not</em> included in the file's size.
+   </p>
+  </li>
+  <li>
+   <p>
+    Only the <strong>main stream</strong> of a file is preserved when it is copied to a FAT-formatted USB drive, attached to an e-mail, or uploaded to a website.
+   </p>
+  </li>
+  <li>
+   <p>
+    As a result, using alternate streams for critical data may cause problems.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0750_ntfs_data_streams"></a>
+
+
+    <h3>
+        75. NTFS Data Streams
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    NTFS <strong>data stream</strong> is a unique set of file attributes.
+   </p>
+  </li>
+  <li>
+   <p>
+    NTFS supports <em>multiple data streams</em> per file:
+   </p>
+   <ul>
+    <li>
+     <p>
+      one <strong>main stream</strong>
+     </p>
+    </li>
+    <li>
+     <p>
+      plus an optional set of <strong>alternate data streams</strong>
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    A data stream can be created in an existing file on an NTFS volume using a command like
+   </p>
+<pre><tt>
+    C:\&gt;ECHO hello &gt; myfile.txt:stream1
+</tt>
+</pre>
+   <p>
+    To display the contents of the data stream,
+   </p>
+<pre><tt>
+    C:\&gt;MORE &lt; myfile.txt:stream1
+</tt>
+</pre>
+  </li>
+  <li>
+   <p>
+    A data stream does not appear when a file is opened in a text editor!
+   </p>
+  </li>
+  <li>
+   <p>
+    The only way to see if a data stream is attached to a file is by examining the MFT entry for the file.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0760_alternate_data_stream"></a>
+
+
+    <h3>
+        76. Alternate Data Streams, cont.
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    An example of ADS usage by the applications is when a small ADS is added by the Internet Explorer and other Internet browsers to mark files that have been downloaded from the Internet.
+   </p>
+  </li>
+  <li>
+   <p>
+    Because downloaded content may be unsafe to run locally, the local OS shell will ask the user for a confirmation before opening downloaded files.
+   </p>
+  </li>
+  <li>
+   <p>
+    The user can open the properties dialog and drop the warning flag -- the result is that ADS attribute is simply removed from the MFT entry.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0770_ntfs_compressed_files"></a>
+
+
+    <h3>
+        77. NTFS Compressed Files
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    NTFS is capable of compressing
+   </p>
+   <ul>
+    <li>
+     <p>
+      individual files
+     </p>
+    </li>
+    <li>
+     <p>
+      all files within a folder
+     </p>
+    </li>
+    <li>
+     <p>
+      all files/folders on the volume.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Compression is executed within NTFS.
+   </p>
+  </li>
+  <li>
+   <p>
+    Any Windows program can read/write compressed files without considering the extent of the compression.
+   </p>
+  </li>
+  <li>
+   <p>
+    When a compressed file is opened, only a part of the file is decompressed while being read.
+   </p>
+  </li>
+  <li>
+   <p>
+    Data already in memory is uncompressed.
+   </p>
+  </li>
+  <li>
+   <p>
+    Modified and new data is compressed again -- when written to the compressed file on disk.
+   </p>
+  </li>
+  <li>
+   <p>
+    NTFS compression algorithms support cluster sizes of up to 4 KB.
+   </p>
+  </li>
+  <li>
+   <p>
+    The best use of compression is for files which are repetitive, written seldom, usually accessed sequentially: log files are an ideal example.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0780_ntfs_compresion_detai"></a>
+
+
+    <h3>
+        78. NTFS Compresion Details
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Compresion works in blocks of 16 clusters
+   </p>
+  </li>
+  <li>
+   <p>
+    Data is compressed using a modified LZ77 algorithm, named LZNT1.
+   </p>
+  </li>
+  <li>
+   <p>
+    Each block is compressed independently
+   </p>
+  </li>
+  <li>
+   <p>
+    If compressed block does not become less than the original 16 clusters,
+    it is left <em>uncompressed</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    Compressing a file adds serious complexity to the way the file is stored.
+   </p>
+  </li>
+  <li>
+   <p>
+    The MFT is <em>the only place</em> that contains information about what parts
+    are compressed and by how much.
+   </p>
+  </li>
+  <li>
+   <p>
+    If MFT is corrupted there is little hope retrieving the data!
+   </p>
+   <p>
+    Reference:
+    <br>
+    <a href="http://en.wikipedia.org/wiki/LZ77" target="_blank"><tt>http://en.wikipedia.org/wiki/LZ77</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0790_files_with_zeroes"></a>
+
+
+    <h3>
+        79. Files with Zeroes
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    When NTFS encounters files with long runs of zeros, the system counts how
+    many zeroes are present in the MFT header attribute. The counter is stored
+    instead of actual data.
+   </p>
+  </li>
+  <li>
+   <p>
+    Long runs of zeros are common on disks, so counting them is an easy way to
+    compress a file.
+   </p>
+  </li>
+  <li>
+   <p>
+    The counting mechanism kicks in when the run of zeros consumes an entire cluster.
+   </p>
+  </li>
+  <li>
+   <p>
+    The resulting "sparseness" of the file is annotated in the data run that maps
+    the clusters allocated to the file.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0800_ntfs_encrypting_file_"></a>
+
+
+    <h3>
+        80. NTFS Encrypting File System (EFS)
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    To protect files from <em>mishandling</em> and to ensure their <em>security</em>, the files can be encrypted.
+   </p>
+  </li>
+  <li>
+   <p>
+    The <strong>Encrypting File System (EFS)</strong> is introduced in NTFS.
+   </p>
+  </li>
+  <li>
+   <p>
+    EFS uses <em>symmetric key encryption</em> technology with <em>public key</em> technology for encryption.
+   </p>
+  </li>
+  <li>
+   <p>
+    The user is supplied with a <strong>digital certificate</strong> with a <strong>public key pair</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    A <strong>private key</strong> is not used for the users who are logged in to the local systems.
+   </p>
+  </li>
+  <li>
+   <p>
+    Instead, an <strong>EFS key</strong> is used for users who are logged in to the local system.
+   </p>
+  </li>
+  <li>
+   <p>
+    This encryption technology maintains a level of <em>transparency</em> to the user who encrypts the file.
+   </p>
+  </li>
+  <li>
+   <p>
+    See also
+    <br>
+    <a href="http://en.wikipedia.org/wiki/Encrypting_File_System" target="_blank"><tt>http://en.wikipedia.org/wiki/Encrypting_File_System</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0810_ntfs_encryption_and_c"></a>
+
+
+    <h3>
+        81. NTFS Encryption and CHNTPW
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Bootdisk-borne utility known as <strong>chntpw</strong> is a Linux utility to reset the password of
+    any user that has a valid local account on a Windows system
+   </p>
+  </li>
+  <li>
+   <p>
+    Thus, <strong>chntpw</strong> allows a user with physical access to a system to change any user's
+    (including the administrator's) password.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>chntpw</strong> modifies encrypted password in the registry's SAM file.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>chntpw</strong> <em>does not</em> need the knowledge of the old password to reset it.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>chntpw</strong> works after booting from a linux floppy or CD disk, etc.
+   </p>
+  </li>
+  <li>
+   <p>
+    The bootdisk includes built-in access to NTFS partitions
+   </p>
+  </li>
+  <li>
+   <p>
+    <em>However,</em>
+   </p>
+   <ul>
+    <li>
+     <p>
+      The normal Windows "change password" process updates the EFS encryption keys,
+     </p>
+    </li>
+    <li>
+     <p>
+      the <strong>chntpw</strong> backdoor method <em>does not</em>.
+     </p>
+    </li>
+    <li>
+     <p>
+      After <strong>chntpw</strong>, the user can log into the newly acquired account; but
+      if NTFS drive is using EFS, the encrypted files remain encrypted and
+      no automatic conversion to plaintext takes place.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0820_chntpw_boot_example"></a>
+
+
+    <h3>
+        82. CHNTPW Boot Example
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     <strong>chntpw</strong> boot menu example:
+   </p>
+   <p>
+    &nbsp;
+    <img src="./NTFS File System Overview_files/chntpw2.png" alt="chntpw boot menu">
+   </p>
+  </li>
+  <li>
+   <p>
+    Reference:
+    <br>
+    <a href="http://whatisgon.wordpress.com/2010/01/28/chntpw-tutorial-resetting-windows-passwords-editing-registry-linux/" target="_blank"><tt>http://whatisgon.wordpress.com/2010/01/28/chntpw-tutorial-resetting-windows-passwords-editing-registry-linux/</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0830_efs_basic_usage"></a>
+
+
+    <h3>
+        83. EFS Basic Usage
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    There is no need for users to decrypt the file when they access it to make changes.
+   </p>
+  </li>
+  <li>
+   <p>
+    After a user is done with the file, the encryption policy is automatically restored:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       When any unauthorized user tries to access encrypted file, access is denied.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    To enable the encryption and decryption facilities, a user has to set the <strong>encryption attributes</strong> of the desired files/folders.
+   </p>
+  </li>
+  <li>
+   <p>
+    All files/subfolders in an encrypted folder are automatically encrypted.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ 
+ <hr>
+
+
+<a id="W01_0840_efs_best_practices"></a>
+
+
+    <h3>
+        84. EFS Best Practices
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    To take the best advantage of the encryption capability, experts recommend that encryption should be done <em>at the folder level</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    That means a particular <strong>encrypted file</strong> <em>should not</em> be kept in the same folder as other files that are <em>not encrypted</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    Encryption is done using the graphical user interface (GUI) in Windows, but a file or a folder can also be encrypted using a command line tool like <tt>Cipher</tt>.
+   </p>
+  </li>
+  <li>
+   <p>
+    A <strong>file encryption certificate</strong> is issued whenever a file is encrypted.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0850_efs_recovery_for_lost"></a>
+
+
+    <h3>
+        85. EFS Recovery for Lost Private Key
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    If the person who encrypted the file loses that certificate and the associated <strong>private key</strong>, data recovery is performed through the <strong>recovery key agent</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    In case of a Windows 200X server-based network, which uses <strong>Active Directory</strong>, the recovery agent is assigned by default to the domain administrator.
+   </p>
+  </li>
+  <li>
+   <p>
+    The recovery agent holds a special <strong>certificate</strong> and related <strong>private key</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    The recovery certificate is issued by a certification authority (CA).
+   </p>
+  </li>
+  <li>
+   <p>
+    Using the recovery certificate and its related private key, the agent can recover the data.
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0860_efs_details"></a>
+
+
+    <h3>
+        86. EFS Details
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    EFS uses symmetric key encryption (DESX with 128bit key) in conjunction
+    with public key technology (RSA).
+   </p>
+  </li>
+  <li>
+   <p>
+    Users of EFS are issued a digital certificate with a <strong>public key</strong>
+    and a <strong>private key</strong> pair.
+   </p>
+  </li>
+  <li>
+   <p>
+    This key pair is used to decrypt a File Encryption Key (FEK) file that
+    holds the key to decrypting the data. Each encrypted file has an
+    associated FEK encrypted with the public key of each user allowed to use the file.
+   </p>
+  </li>
+  <li>
+   <p>
+    With the FIPS-compliant algorithms usage turned on in LSA policy, the
+    encryption is with 3DES using a 168-bit key. The process is
+    completely transparent to the user.
+   </p>
+  </li>
+  <li>
+   <p>
+    Key management is handled by the Local Security Authority Subsystem, <strong>lsass.exe</strong>
+    without the user's intervention.
+   </p>
+  </li>
+  <li>
+   <p>
+    The data is encrypted/decrypted as it passes to/from the drive. To
+    turn EFS on, the user sets the encryption attribute in the file or folder's properties.
+   </p>
+  </li>
+  <li>
+   <p>
+    In addition to the individual user's public key information, each FEK also
+    contains a <strong>recovery key</strong>. An entity,
+    usually a domain administrator, is assigned as a <strong>Recovery Agent</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    The recovery agent can decrypt ANY file, so an attacker who hijacks the recovery
+    agent account has also hijacked the ability to read all encrypted data.
+   </p>
+  </li>
+  <li>
+   <p>
+    This requires that the user/administrator authenticate with the same password
+    they normally do, so most attacks on privilege escalation render the data unrecoverable.
+    There is an attack on the cached login credentials that an attacker can use.
+   </p>
+  </li>
+  <li>
+   <p>
+    Windows systems not on a network domain <em>do not</em> create a recovery agent.
+   </p>
+   <p>
+    References:
+    <br>
+    <a href="http://www.ntfs.com/ntfs-encrypted.htm" target="_blank"><tt>http://www.ntfs.com/ntfs-encrypted.htm</tt></a>
+    <br>
+    <a href="http://www.microsoft.com/windows2000/docs/encrypt.doc" target="_blank"><tt>http://www.microsoft.com/windows2000/docs/encrypt.doc</tt></a>
+    <br>
+    <a href="http://www.microsoft.com/windows2000/techinfo/howitworks/security/encrypt.asp" target="_blank"><tt>http://www.microsoft.com/windows2000/techinfo/howitworks/security/encrypt.asp</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0870_ntfs_volume_shadow_co"></a>
+
+
+    <h3>
+        87. NTFS Volume Shadow Copy
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Also known as <strong>Volume Snapshot Service</strong> or <strong>Volume Shadow Copy Service</strong> or <strong>VSS</strong>
+   </p>
+  </li>
+  <li>
+   <p>
+    The purpose is to provide an instant backup of files. Modified files are
+    copied to the <em>Shadow Copy</em> of the volume on which the originals reside.
+   </p>
+  </li>
+  <li>
+   <p>
+    This NTFS feature is for backing up <em>critical servers</em> that can't
+    afford the loss of data between traditional tape backups.
+   </p>
+  </li>
+  <li>
+   <p>
+    NTFS Shadow Copy can be accomplished in two different ways:
+   </p>
+   <ul>
+    <li>
+     <p>
+      hardware-based, or
+     </p>
+    </li>
+    <li>
+     <p>
+      software-based.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    The Shadow Copy can either operate in two modes:
+   </p>
+   <ul>
+    <li>
+     <p>
+      <strong>Online backup</strong> mode:
+     </p>
+     <ul>
+      <li>
+       <p>
+        functions like a RAID, where any transaction on one drive
+        also happens on the other.
+       </p>
+      </li>
+      <li>
+       <p>
+        This is <em>read/write, full copy mirror</em>: both drives will have identical logical structure.
+       </p>
+      </li>
+      <li>
+       <p>
+        The <em>clone drives</em> are exact mirror images of the original.
+       </p>
+      </li>
+     </ul>
+    </li>
+    <li>
+     <p>
+      <strong>Copy-on-write</strong> mode -- before file is modified on the original drive, the
+     </p>
+    </li>
+   </ul>
+<pre>    "Original" + "Difference between new and unmodified copy"
+</pre>
+   <p>
+    is written to the shadow volume first. Then the modification of the file takes place
+    on the original volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    <strong>Copy-on-write mode</strong> operates like a mirror, but provides that any modification
+    has a "prior version". This allows for the original drive
+    to be <em>rolled back</em> in case if a write transaction goes bad. Thus,
+   </p>
+<pre>    Shadow Copy = Original + Difference
+</pre>
+  </li>
+  <li>
+   <p>
+    <strong>Copy-on-write</strong> can be much faster than the <strong>online backup</strong>,
+    because only the changes are written instead of everything.
+    (The original must still be available to maintain the shadow copy, but is written just once.)
+   </p>
+  </li>
+  <li>
+   <p>
+    NOTE: Unlike a true <em>versioning file system</em>, the users cannot trigger creation of new versions of an individual file -- only the <em>entire volume</em>.
+   </p>
+  </li>
+  <li>
+   <p>
+    Reference:
+    <br>
+    <a href="http://en.wikipedia.org/wiki/Shadow_Copy" target="_blank"><tt>http://en.wikipedia.org/wiki/Shadow_Copy</tt></a>
+    <br>
+    <a href="http://www.microsoft.com/technet/prodtechnol/windowsserver2003/library/TechRef/2b0d2457-b7d8-42c3-b6c9-59c145b7765f.mspx" target="_blank">Windows Server</a>
+    (<tt>technet.microsoft.com</tt>)
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0880_windows_volume_shadow"></a>
+
+
+    <h3>
+        88. Windows Volume Shadow Copy Usage
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Other names:
+   </p>
+   <ul>
+    <li>
+     <p>
+      Volume Snapshot Service
+     </p>
+    </li>
+    <li>
+     <p>
+      Previous Versions
+     </p>
+    </li>
+    <li>
+     <p>
+      Shadow Copies for Shared Folders
+     </p>
+    </li>
+    <li>
+     <p>
+      VSS
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    Beginning with <strong>Windows Vista</strong>, and continued by <strong>Windows 7</strong>, the VSS is used by the <em>System Protection</em> component.
+   </p>
+  </li>
+  <li>
+   <p>
+    System Protection creates and maintains periodic <strong>copies</strong> of system and user data on the same local volume.
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       (This is similar to the Shadow Copies for Shared Folders feature in Windows Server)
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    System Protection allows is used by <strong>System Restore</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    The <strong>System Restore</strong> allows reverting to an entire previous set of shadow copies called a <strong>Restore point</strong>.
+   </p>
+  </li>
+  <li>
+   <p>
+    A shell extension called <strong>Previous Versions</strong> allows restoring individual files and entire folders locally from the existing restore points,
+    retrieving an earlier version of a file or recovering a file deleted by mistake.
+   </p>
+  </li>
+  <li>
+   <p>
+    The shadow copy <em>is not</em> created every time a file is changed. The backup copy (a restore point) is created
+   </p>
+   <ul>
+    <li>
+     <p>
+      automatically <em>once per day</em>, or
+     </p>
+    </li>
+    <li>
+     <p>
+      manually when running the backup utility, or
+     </p>
+    </li>
+    <li>
+     <p>
+      manually when the installer program is run on the system.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    <strong>Previous Versions</strong> shell extension comes with
+   </p>
+   <ul>
+    <li>
+     <p>
+      Business, Enterprise, and Ultimate editions of Windows Vista, and
+     </p>
+    </li>
+    <li>
+     <p>
+      all Windows 7 editions.
+     </p>
+    </li>
+   </ul>
+  </li>
+  <li>
+   <p>
+    The Volume Snapshot Service is included and running on <em>all editions</em> of Vista, including the Home Editions:
+   </p>
+   <ul style="list-style-type:none;">
+    <li>
+     <p>
+       Using third party tools it is still possible to restore previous versions of files on the local Vista or Windows 7 volume.
+     </p>
+    </li>
+   </ul>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0890_clearing_the_restore_"></a>
+
+
+    <h3>
+        89. Clearing the Restore Point History
+    </h3>
+ <hr>
+ <ul style="list-style-type:none;">
+  <li>
+   <p>
+     On Windows Vista and 7, by turning off system restore all previous restore points are deleted.
+   </p>
+   <ol>
+    <li>
+     <p>
+       Locate "my computer" icon, right click and choose properties.
+     </p>
+    </li>
+    <li>
+     <p>
+      The "Control Panel\System" dialog box appears.
+     </p>
+    </li>
+    <li>
+     <p>
+      Click "System Protection" link
+     </p>
+    </li>
+    <li>
+     <p>
+      UAC warning appears
+     </p>
+    </li>
+    <li>
+     <p>
+      Click the "System Protection" tab (sometimes may appear named "System Restore" tab):
+     </p>
+     <p>
+      &nbsp;
+      <img src="./NTFS File System Overview_files/system_properties.png" alt="Vista System Protection tab">
+     </p>
+    </li>
+    <li>
+     <p>
+      Click "System Restore" button to examine the history of existing restore points. Typically there are 15 of them or so.
+     </p>
+    </li>
+    <li>
+     <p>
+      Trying uncheck the volume on the list triggers the warning:
+     </p>
+     <p>
+      &nbsp;
+      <img src="./NTFS File System Overview_files/uncheck_restore_points.png" alt="Turn System Protection off warning">
+     </p>
+    </li>
+    <li>
+     <p>
+      Clicking the button "Turn System Restore Off" will <em>delete the existing restore points</em>.
+     </p>
+    </li>
+    <li>
+     <p>
+      Click apply, then click OK. Done.
+     </p>
+    </li>
+   </ol>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+ <hr>
+
+
+<a id="W01_0900_ntfs_single_instance_"></a>
+
+
+    <h3>
+        90. NTFS Single Instance Storage
+    </h3>
+ <hr>
+ <ul>
+  <li>
+   <p>
+    Abbreviated as <strong>SIS</strong>
+   </p>
+  </li>
+  <li>
+   <p>
+    If several directories contain same exact file, <em>only one instance</em> will really exist.
+   </p>
+  </li>
+  <li>
+   <p>
+    Two-part function:
+   </p>
+   <ol>
+    <li>
+     <p>
+       NTFS "filter" that manages the copies
+     </p>
+    </li>
+    <li>
+     <p>
+      User space service <strong>Groveler</strong> searches for identical files to merge
+     </p>
+    </li>
+   </ol>
+  </li>
+  <li>
+   <p>
+    Again, this feature is designed for servers containing multiple installation programs
+    in which many of the files could be the same coming from different distributions of
+    software install packages.
+   </p>
+  </li>
+  <li>
+   <p>
+    If SIS is disabled after it has been running, only the <strong>Groveler</strong> is disabled.
+   </p>
+  </li>
+  <li>
+   <p>
+    The SIS file system "filter" component must remain active as
+    long as there are merged files on the volume.
+   </p>
+  </li>
+  <li>
+   <p>
+    There will be a SIS Common Store folder that contains information about which
+    files are linked. If this folder is deleted, all of the linked files will become inaccessible.
+   </p>
+  </li>
+  <li>
+   <p>
+    Reference:
+    <br>
+    <a href="http://support.microsoft.com/default.aspx?scid=kb;en-us;299726" target="_blank"><tt>http://support.microsoft.com/default.aspx?scid=kb;en-us;299726</tt></a>
+   </p>
+   <p>
+    &nbsp;
+   </p>
+  </li>
+ </ul>
+
+
+    
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
