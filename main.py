@@ -108,5 +108,3 @@ if __name__ == "__main__":
         else:
             print(f'{disk} is not a valid NTFS disk. Try again.')
         os.system('pause')
-
-    
